@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .top-center {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+    </style>
+</head>
+<body>
+    <div class="top-center">ASMATH HAZEENA | Reg No: 61781922102014</div>
+    <div class="container">
+        <h2>Registration Details</h2>
+        <p id="displayData"></p>
+        <button onclick="goBack()">Go Back</button>
+    </div>
+
+    <script>
+        function displayData() {
+            let formData = localStorage.getItem("formData");
+            if (formData) {
+                let data = JSON.parse(formData);
+                document.getElementById("displayData").innerHTML = `
+                    <b>Name:</b> ${data.name} <br>
+                    <b>Email:</b> ${data.email} <br>
+                    <b>Date of Birth:</b> ${data.dob} <br>
+                    <b>Age:</b> ${data.age} <br>
+                    <b>Gender:</b> ${data.gender} <br>
+                    <b>Country:</b> ${data.country}
+                `;
+            } else {
+                document.getElementById("displayData").innerHTML = "No data found.";
+            }
+        }
+
+        function goBack() {
+            window.location.href = "index.html"; // Redirect back
+        }
+
+        displayData(); // Call function on page load
+    </script>
+</body>
+</html>
