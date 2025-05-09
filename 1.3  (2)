@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 1.3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #7e7676, #ffffff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+            width: 400px;
+        }
+        h2 {
+            text-align: center;
+            color: #000000;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            background: #000000;
+            color: rgb(232, 223, 223);
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: #ffffff;
+        }
+        .top-center {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    white-space: nowrap; /* Prevents text from wrapping */
+}
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="top-center">Asmath Hazeena M | Reg No: 61781922102014</div>
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+            <label>Full Name:</label>
+            <input type="text" id="name" required>
+            
+            <label>Email:</label>
+            <input type="email" id="email" required>
+            
+            <label>Password:</label>
+            <input type="password" id="password" required>
+
+            <label>Date of Birth:</label>
+            <input type="date" id="dob" required oninput="calculateAge()">
+            
+            <label>Age:</label>
+            <input type="number" id="age" readonly>
+
+            <label>Gender:</label>
+            <select id="gender" required>
+                <option value="">-- Select Gender --</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            
+            <label>Country:</label>
+            <select id="country" required>
+                <option value="">-- Select Country --</option>
+                <option value="USA">USA</option>
+                <option value="UK">UK</option>
+                <option value="India">India</option>
+            </select>
+            
+            <input type="checkbox" id="terms" required> I agree to the Terms & Conditions
+            <br><br>
+            
+            <button type="button" class="btn" onclick="submitForm()">Register</button>
+        </form>
+    </div>
+    
+    <script>
+    function calculateAge() {
+        let dob = document.getElementById("dob").value;
+        if (dob) {
+            let dobDate = new Date(dob);
+            let today = new Date();
+            let age = today.getFullYear() - dobDate.getFullYear();
+            let monthDiff = today.getMonth() - dobDate.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dobDate.getDate())) {
+                age--; // Adjust if birthday hasn't occurred yet this year
+            }
+            
+            document.getElementById("age").value = age;
+        }
+    }
+
+    function submitForm() {
+        let name = document.getElementById("name").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let password = document.getElementById("password").value.trim();
+        let dob = document.getElementById("dob").value;
+        let age = document.getElementById("age").value;
+        let gender = document.getElementById("gender").value;
+        let country = document.getElementById("country").value;
+        let termsChecked = document.getElementById("terms").checked;
+
+        if (name === "" || email === "" || password === "" || dob === "" || age === "" || gender === "" || country === "") {
+            alert("Please fill all fields.");
+            return;
+        }
+
+        if (!termsChecked) {
+            alert("You must agree to the Terms & Conditions.");
+            return;
+        }
+
+        let formData = { name, email, dob, age, gender, country };
+        localStorage.setItem("formData", JSON.stringify(formData));
+
+        alert("Successfully filled!");
+        window.location.href = "display.html";
+    }
+    </script>
+</body>
+</html>
