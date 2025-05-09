@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 1.1</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(to right, #ffffff, #c2e9fb);
+            text-align: center;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            text-align:center;
+            padding: 10px 20px;
+            font-weight: bold;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .box {
+            width: 70px;
+            height: 70px;
+            background-color: aqua;
+            margin: 20px auto;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .box:hover {
+            cursor: pointer;
+        }
+        .task-item {
+            cursor: pointer;
+            color: blue;
+        }
+        button {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+        }
+    </style>
+    <script defer src="index.js"></script>
+</head>
+<body>
+
+    <div class="header">
+        ASMATH HAZEENA | Reg No: 61781922102014
+    </div>
+
+    <div class="container">
+        <h3>1. Change Text</h3>
+        <p id="message">Hello, world</p>
+        <button onclick="changetext()">Submit</button>
+
+        <h2>2. House Hover</h2>
+        <div id="box" class="box" title="You are hovering over the box"></div>
+
+        <h3>3. Addition</h3>
+        <input type="number" id="num1" placeholder="Enter first number">
+        <input type="number" id="num2" placeholder="Enter second number">
+        <button onclick="calculate()">Click</button>
+        <p id="result"></p>
+
+        <h3>4. To-Do List</h3>
+        <input type="text" id="task" placeholder="Enter task">
+        <button onclick="addTask()">Add Task</button>
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        function changetext() {
+            document.getElementById("message").innerText = 'Sona College';
+        }
+
+        let box = document.getElementById("box");
+
+        box.addEventListener("mousedown", function () {
+            box.style.backgroundColor = 'orange';
+        });
+
+        box.addEventListener('mouseleave', function () {
+            box.style.backgroundColor = 'aqua';
+        });
+
+        function calculate() {
+            let num1 = parseFloat(document.getElementById("num1").value);
+            let num2 = parseFloat(document.getElementById("num2").value);
+            let res = num1 + num2;
+            document.getElementById("result").innerHTML = 'Result: ' + res;
+        }
+
+        function addTask() {
+            let taskText = document.getElementById("task").value;
+            if (taskText.trim() !== "") {
+                let li = document.createElement("li");
+                li.innerText = taskText;
+                li.classList.add('task-item');
+                document.getElementById('taskList').appendChild(li);
+                document.getElementById('task').value = "";
+            }
+        }
+    </script>
+
+</body>
+</html>
