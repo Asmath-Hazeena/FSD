@@ -1,0 +1,283 @@
+index.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
+
+Form.jsx
+import React, { useState } from "react";
+import "./Form.css";
+
+const RegistrationForm = () => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    dob: "",
+    address: "",
+    password: "",
+  });
+
+  const [submitted, setSubmitted] = useState(false);
+
+  // Handle Input Change
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Handle Form Submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  return (
+    <div className="form-container">
+      {/* User Information */}
+      <div className="user-info">
+        <p className="user-name">👤 Name: Asmath Hazeena M</p>
+        <p className="reg-no">📝 Reg No: 61781922102014</p>
+      </div>
+
+      {/* Form Section */}
+      <div className="form-box">
+        {submitted ? (
+          <div className="success-message">
+            <h3>Form Submitted Successfully!</h3>
+            <p>Welcome, <strong>{formData.fullName}</strong></p>
+          </div>
+        ) : (
+          <>
+            <h2 className="form-title">User Registration</h2>
+            <form onSubmit={handleSubmit} className="registration-form">
+              {/* Full Name */}
+              <div className="form-group">
+                <label>Full Name</label>
+                <input
+                  type="text"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              {/* Email */}
+              <div className="form-group">
+                <label>Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              {/* Phone Number */}
+              <div className="form-group">
+                <label>Phone Number</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              {/* Date of Birth */}
+              <div className="form-group">
+                <label>Date of Birth</label>
+                <input
+                  type="date"
+                  name="dob"
+                  value={formData.dob}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              {/* Address */}
+              <div className="form-group">
+                <label>Address</label>
+                <textarea
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  required
+                ></textarea>
+              </div>
+
+              {/* Password */}
+              <div className="form-group">
+                <label>Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              {/* Submit Button */}
+              <button type="submit" className="btn-submit">
+                Submit
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+
+    </div>
+  );
+};
+
+export default RegistrationForm;
+
+form.css
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Arial", sans-serif;
+    background-color: #f4f4f9;
+  }
+  
+  /* Form Container */
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+  }
+  
+  /* User Info */
+  .user-info {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Form Box */
+  .form-box {
+    background-color: #ffffff;
+    width: 400px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+  }
+  
+  /* Form Title */
+  .form-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  /* Form Group */
+  .form-group {
+    text-align: left;
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  
+  .form-group textarea {
+    height: 60px;
+    resize: none;
+  }
+  
+  /* Submit Button */
+  .btn-submit {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .btn-submit:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Success Message */
+  .success-message {
+    padding: 20px;
+    background: #d4edda;
+    color: #155724;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+  
+  /* Footer */
+  .footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+
+app.js
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Form from "./asmath/Form";
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Form />}/>
+      </Routes>
+    </Router>
+  );
+}
+export default App;
+
+
+index.js
+  import React from 'react';
+  import ReactDOM from 'react-dom/client';
+  import App from './App';
+
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+
